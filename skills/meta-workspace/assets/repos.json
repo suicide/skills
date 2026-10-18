@@ -1,0 +1,12 @@
+{
+  "repositories": [
+    {
+      "path": "api",
+      "url": "git@github.com:YOUR-ORG/api.git"
+    },
+    {
+      "path": "sdk",
+      "url": "git@github.com:YOUR-ORG/sdk.git"
+    }
+  ]
+}

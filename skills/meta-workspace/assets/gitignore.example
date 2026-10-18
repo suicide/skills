@@ -1,0 +1,10 @@
+# Generate one root-anchored line for every checkout path in repos.json.
+/api/
+/sdk/
+
+# Ephemeral cross-repository task workspaces
+/tasks/
+
+# Local development outputs (adapt to the environment)
+/.direnv/
+/result
