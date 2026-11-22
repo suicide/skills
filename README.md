@@ -8,6 +8,7 @@ Reusable [Agent Skills](https://agentskills.io/specification) for software devel
 | --- | --- |
 | [meta-workspace](skills/meta-workspace/SKILL.md) | Create or maintain a parent Git repository coordinating independent application/library repositories. |
 | [multi-repo-worktrees](skills/multi-repo-worktrees/SKILL.md) | Isolate features or fixes in Git worktrees across one or several repositories (also works for a single repository). |
+| [long-running-work](skills/long-running-work/SKILL.md) | Checkpoint and resume substantial coding work across worker contexts or costly verification stages. Optional; skip for ordinary changes. |
 
 ## Install
 
@@ -17,12 +18,15 @@ With the GitHub CLI's `gh skill` command (authentication is needed for this priv
 # Available in all OpenCode projects
 gh skill install suicide/skills meta-workspace --agent opencode --scope user
 gh skill install suicide/skills multi-repo-worktrees --agent opencode --scope user
+gh skill install suicide/skills long-running-work --agent opencode --scope user
 
 # Or install only one skill into the current project
 gh skill install suicide/skills multi-repo-worktrees --agent opencode --scope project
 ~~~
 
 `meta-workspace` is intentionally excluded from OpenCode's automatic skill suggestions: explicitly load or request it when setting up a workspace. `multi-repo-worktrees` can be selected when appropriate. Installation copies the skill and its bundled templates; this repository need not remain checked out.
+
+`long-running-work` is an optional procedure for single- or multi-repo tasks, not a default workflow or a replacement for always-on agent rules (see [nixcfg #6](https://github.com/suicide/nixcfg/issues/6)).
 
 See [`gh skill` documentation](https://cli.github.com/manual/gh_skill_install) for installation and version pinning.
 
@@ -36,6 +40,9 @@ skills/
   multi-repo-worktrees/
     SKILL.md
     assets/                # Optional task instructions template
+  long-running-work/
+    SKILL.md
+    assets/                # Optional handoff example
 ~~~
 
 The repository follows the portable `SKILL.md` format. Add each new skill at `skills/<name>/SKILL.md`, with any templates under that skill's `assets/`. Keep behavior in skills, durable project rules in each project's `AGENTS.md`, and deterministic automation in scripts only when genuinely needed.
