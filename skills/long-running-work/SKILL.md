@@ -21,6 +21,9 @@ need a checkpoint, task graph, or additional agent.
 4. End each package with evidence that meets its criteria, a specific blocker,
    or a resumable checkpoint.
 
+The coordinator owns decomposition and scheduling. Workers own their assigned
+package and report when further coordination or splitting is needed.
+
 For workspace setup or checkout isolation, see `meta-workspace` or
 `multi-repo-worktrees` as needed. Neither is required.
 
@@ -30,13 +33,15 @@ For workspace setup or checkout isolation, see `meta-workspace` or
   and reuse them only when safe. If retries give the same failure with no new
   evidence, stop retrying and diagnose, change strategy, or report the blocker.
   Follow any budgets in the task brief; there is no universal retry or time limit.
-- When you need a checkpoint, keep it in one task-local directory in the
-  meta-workspace or in the repo (e.g. `./.tmp/<task>/`). If Git doesn’t already
-  ignore it, add it to the enclosing repository’s `.gitignore`.
+- When you need a checkpoint, keep it in a task-local directory in the
+  meta-workspace if available, otherwise within the repository (e.g.
+  `./.tmp/<task>/`). Never stage or commit these temporary files; do not
+  modify `.gitignore` just to store them.
 - Update the checkpoint at milestones or handoff; chat and compaction alone
   are not durable. Adapt the [handoff example](assets/handoff.md) to capture
-  actual status, scope, evidence, and the next action. Link to raw evidence in
-  ignored or secured storage; keep credentials and large logs out of the notes.
+  actual status, scope, evidence, and the next action. For multi-package work,
+  preserve overall package statuses and dependencies too. Link to raw evidence
+  stored locally or securely; keep credentials and large logs out of the notes.
 - On resume, verify branches, working trees, changes, and environment before
   relying on the handoff. Recheck stale evidence and resolve discrepancies
   without overwriting unexpected edits or blindly replaying commands.
