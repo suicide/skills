@@ -1,7 +1,8 @@
 # Handoff — `task or package`
 
-Adapt or omit fields as needed. Use one status: `COMPLETE` (criteria met),
-`PARTIAL` (work remains), or `BLOCKED` (cannot proceed without a specific change).
+Adapt or omit fields as needed. Status applies to the scope of this handoff:
+`COMPLETE` (assigned criteria met, not necessarily the parent task),
+`PARTIAL` (work remains), or `BLOCKED` (a specific dependency prevents progress).
 
 - **Status:**
 - **Goal / approved scope and decisions:** Requirements and decision links
